@@ -47,9 +47,9 @@ public class VendaProdutoServiceImpl implements VendaProdutoService {
 
 
         // fazer o metodo de buscar unico e dps fazer o metodo de vender
-        VendaDto vendaDtoResponse = 
+        VendaDto vendaDtoResponse = MAPPER.map(repositoryResponse.get(), VendaDto.class);
 
-        return null;
+        return Optional.of(vendaDtoResponse);
     }
     
     
