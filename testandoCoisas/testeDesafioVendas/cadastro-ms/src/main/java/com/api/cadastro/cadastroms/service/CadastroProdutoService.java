@@ -10,4 +10,7 @@ public interface CadastroProdutoService {
     Optional<List<ProdutoDto>> listAll ();
     Optional<ProdutoDto> getUnique (String id);
     Optional<ProdutoDto> postUnique (ProdutoDto produto);
+    Optional<ProdutoDto> getUniqueByCodigo (String codigo);
+    Boolean putStock (String codigo,int removerEstoque);
+
 }

@@ -32,11 +32,11 @@ public class CadastroProdutoServiceImpl implements CadastroProdutoService {
 
         List<ProdutoDto> ListProdutoDto = repository.findAll().stream()
         .map(dat -> MAPPER.map(dat, ProdutoDto.class)).collect(Collectors.toList());
-
+        
         return Optional.of(ListProdutoDto);
     }
-
-
+    
+    
     @Override
     public Optional<ProdutoDto> getUnique (String id) {
         
@@ -49,16 +49,52 @@ public class CadastroProdutoServiceImpl implements CadastroProdutoService {
         Optional<ProdutoDto> produtoDtoResponse = Optional.of(MAPPER.map(repositoryResponse.get(), ProdutoDto.class));
         return produtoDtoResponse;
     }
+    
+    @Override
+    public Optional<ProdutoDto> getUniqueByCodigo(String codigo) {
+        
+        Optional<Produto> repositoryResponse = repository.findByCodigo(codigo);
 
+        if (repositoryResponse.isEmpty()) {
+            return Optional.empty();
+        }
 
+        return Optional.of(MAPPER.map(repositoryResponse.get(), ProdutoDto.class));
+    }
+    
     @Override
     public Optional<ProdutoDto> postUnique(ProdutoDto produto) {
-
+        
         Produto repositoryRequest = MAPPER.map(produto, Produto.class);
         Produto repositoryResponse = repository.save(repositoryRequest);
         ProdutoDto produtoResponse = MAPPER.map(repositoryResponse, ProdutoDto.class);
         
         return Optional.of(produtoResponse);
     }
+    
+
+    @Override
+    public Boolean putStock(String codigo, int removerEstoque) {
+        
+        Optional<Produto> repositoryResponse = repository.findByCodigo(codigo);
+
+        if (repositoryResponse.isEmpty()) {
+            return false;
+        }
+
+        boolean modResult = repositoryResponse.get().removerEstoque(removerEstoque);
+
+        if (!modResult) {
+            return false;
+        }
+
+        repository.save(repositoryResponse.get());
+
+        return true;
+    }
+
+
+
+    
     
 }

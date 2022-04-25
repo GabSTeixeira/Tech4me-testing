@@ -5,6 +5,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 import javax.validation.Valid;
+import javax.ws.rs.Path;
 
 import com.api.cadastro.cadastroms.service.CadastroProdutoService;
 import com.api.cadastro.cadastroms.shared.ProdutoDto;
@@ -17,6 +18,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -47,12 +49,10 @@ public class CadastoProdutoController {
     
     }
 
-    @GetMapping("/buscar/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<ProdutoResponse> getUnique (@PathVariable String id) {
         Optional<ProdutoDto> serviceResponse = service.getUnique(id);
 
-
-        System.out.println("\n\n\n\n"+serviceResponse.get()+"\n\n\n\n");
         if (serviceResponse.isEmpty()) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
@@ -60,6 +60,12 @@ public class CadastoProdutoController {
         ProdutoResponse produtoResponse = MAPPER.map(serviceResponse.get(), ProdutoResponse.class);
 
         return new ResponseEntity<>(produtoResponse, HttpStatus.FOUND);
+    }
+
+    @GetMapping("/pesquisar-por-codigo/{codigo}")
+    public Optional<ProdutoResponse> getUniqueByCodigo (@PathVariable String codigo) {
+        
+        return Optional.of(MAPPER.map(service.getUniqueByCodigo(codigo).get(), ProdutoResponse.class));
     }
 
     @PostMapping("/adicionar")
@@ -72,5 +78,10 @@ public class CadastoProdutoController {
 
         return new ResponseEntity<>(produtoResponse, HttpStatus.CREATED);
 
+    }
+
+    @PutMapping("/modificar-estoque/{codigo}/{novaQuantidade}")
+    public boolean putStock (@PathVariable String codigo, @PathVariable int novaQuantidade) {
+        return service.putStock(codigo,novaQuantidade);
     }
 }

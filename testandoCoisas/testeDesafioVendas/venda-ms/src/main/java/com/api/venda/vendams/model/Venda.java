@@ -1,5 +1,6 @@
 package com.api.venda.vendams.model;
 
+import com.api.venda.vendams.shared.Produto;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -10,7 +11,14 @@ public class Venda {
     private String codigo;
     private int quantidade;
     private String dataVenda;
+    private Produto produto;
     
+    public Produto getProduto() {
+        return produto;
+    }
+    public void setProduto(Produto produto) {
+        this.produto = produto;
+    }
     public String getId() {
         return id;
     }

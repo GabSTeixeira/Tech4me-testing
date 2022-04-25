@@ -1,17 +1,20 @@
-package com.api.venda.vendams.shared;
+package com.api.venda.vendams.view.model;
 
-public class VendaDto {
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+
+public class VendaInsert {
+    
+    @NotBlank(message = "codigo não pode estar em branco")
+    @NotEmpty(message = "codigo não pode ser vazio")
     private String codigo;
+    @Min(1)
+    @NotNull(message = "quantidade deve ter um valor")
     private int quantidade;
     private String dataVenda;
-    private Produto produto;
     
-    public Produto getProduto() {
-        return produto;
-    }
-    public void setProduto(Produto produto) {
-        this.produto = produto;
-    }
     public String getCodigo() {
         return codigo;
     }
@@ -30,4 +33,5 @@ public class VendaDto {
     public void setDataVenda(String dataVenda) {
         this.dataVenda = dataVenda;
     }
+
 }

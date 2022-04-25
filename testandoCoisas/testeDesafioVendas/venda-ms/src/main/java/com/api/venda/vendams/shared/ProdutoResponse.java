@@ -1,11 +1,11 @@
-package com.api.cadastro.cadastroms.shared;
+package com.api.venda.vendams.shared;
 
-public class ProdutoDto {
+public class ProdutoResponse {
     
     private String nome;
-    private String codigo;
     private double preco;
     private int quantidade;
+
 
     public int getQuantidade() {
         return quantidade;
@@ -18,12 +18,6 @@ public class ProdutoDto {
     }
     public void setNome(String nome) {
         this.nome = nome;
-    }
-    public String getCodigo() {
-        return codigo;
-    }
-    public void setCodigo(String codigo) {
-        this.codigo = codigo;
     }
     public double getPreco() {
         return preco;
