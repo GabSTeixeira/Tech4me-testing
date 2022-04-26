@@ -6,13 +6,21 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
 public class ProdutoRequest {
-    @NotBlank @NotEmpty
+    @NotBlank(message = "nome não pode estar em branco") @NotEmpty(message = "nome não pode ser vazio")
     private String nome;
-    @NotBlank @NotEmpty
+    @NotBlank(message = "codigo não pode estar em branco") @NotEmpty(message = "codigo não pode ser vazio")
     private String codigo;
-    @Min((long) 0.01) @NotNull
+    @Min((long) 0.01) @NotNull(message = "preco deve conter um valor")
     private double preco;
+    @NotNull(message = "quantidadeEstoque não pode estar em branco")
+    private int quantidadeEstoque;
     
+    public int getQuantidadeEstoque() {
+        return quantidadeEstoque;
+    }
+    public void setQuantidadeEstoque(int quantidadeEstoque) {
+        this.quantidadeEstoque = quantidadeEstoque;
+    }
     public String getNome() {
         return nome;
     }

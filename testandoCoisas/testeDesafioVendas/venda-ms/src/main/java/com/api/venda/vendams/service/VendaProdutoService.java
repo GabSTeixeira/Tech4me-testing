@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.Optional;
 
 import com.api.venda.vendams.shared.VendaDto;
-import com.api.venda.vendams.view.model.VendaDetails;
 
 public interface VendaProdutoService {
     

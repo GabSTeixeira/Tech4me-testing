@@ -8,6 +8,8 @@ import javax.validation.Valid;
 
 import com.api.venda.vendams.service.VendaProdutoService;
 import com.api.venda.vendams.shared.VendaDto;
+import com.api.venda.vendams.view.model.VendaDetails;
+import com.api.venda.vendams.view.model.VendaInsert;
 import com.api.venda.vendams.view.model.VendaResponse;
 
 import org.modelmapper.ModelMapper;
@@ -60,6 +62,21 @@ public class VendaProdutoController {
     }
 
 
+    @PostMapping("/adicionar")
+    public ResponseEntity<VendaDetails> postUnique (@RequestBody @Valid VendaInsert venda) {
+        
+        VendaDto vendaReq = MAPPER.map(venda, VendaDto.class);
+        Optional<VendaDto> vendaRes = service.postUnique(vendaReq);
+
+        if (vendaRes.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+
+        VendaDetails vendaDetailsRes = MAPPER.map(vendaRes.get(), VendaDetails.class);
+
+        return new ResponseEntity<>(vendaDetailsRes, HttpStatus.CREATED);
+         
+    }
     
 
 }

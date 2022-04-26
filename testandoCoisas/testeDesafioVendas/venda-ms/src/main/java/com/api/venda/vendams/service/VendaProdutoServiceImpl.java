@@ -2,7 +2,6 @@ package com.api.venda.vendams.service;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -12,23 +11,21 @@ import com.api.venda.vendams.model.Venda;
 import com.api.venda.vendams.repository.VendaProdutoRepository;
 import com.api.venda.vendams.shared.Produto;
 import com.api.venda.vendams.shared.VendaDto;
-import com.api.venda.vendams.view.model.VendaDetails;
+import com.netflix.discovery.converters.Auto;
 
 import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class VendaProdutoServiceImpl implements VendaProdutoService {
 
     private final ModelMapper  MAPPER = new ModelMapper();
-    private final VendaProdutoRepository repository;
-    private final ProdutoFeingClient cadastro;
-
-    VendaProdutoServiceImpl (VendaProdutoRepository repository, ProdutoFeingClient cadastro) {
-        this.repository = repository;
-        this.cadastro = cadastro;
-    }
-
+    
+    @Autowired
+    private  VendaProdutoRepository repository;
+    @Autowired
+    private  ProdutoFeingClient cadastro;
 
     @Override
     public Optional<List<VendaDto>> listAll() {
@@ -63,7 +60,7 @@ public class VendaProdutoServiceImpl implements VendaProdutoService {
 
     @Override
     public Optional<VendaDto> postUnique (VendaDto venda) {
-        boolean operationSucces = cadastro.putStock(venda.getCodigo(), venda.getQuantidade());
+        boolean operationSucces = cadastro.putStock(venda.getCodigo(), venda.getQuantidadeVendida());
         
         if (!operationSucces) {
             return Optional.empty();

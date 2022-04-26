@@ -10,9 +10,10 @@ public class VendaInsert {
     @NotBlank(message = "codigo não pode estar em branco")
     @NotEmpty(message = "codigo não pode ser vazio")
     private String codigo;
-    @Min(1)
-    @NotNull(message = "quantidade deve ter um valor")
-    private int quantidade;
+    @Min(1) 
+    @NotNull(message = "quantidadeVendida deve ter um valor diferente de null") //pode dar erro
+   // @NotNull(message = "quantidadeVendida deve ter um valor")
+    private int quantidadeVendida;
     private String dataVenda;
     
     public String getCodigo() {
@@ -21,11 +22,11 @@ public class VendaInsert {
     public void setCodigo(String codigo) {
         this.codigo = codigo;
     }
-    public int getQuantidade() {
-        return quantidade;
+    public int getQuantidadeVendida() {
+        return quantidadeVendida;
     }
-    public void setQuantidade(int quantidade) {
-        this.quantidade = quantidade;
+    public void setQuantidadeVendida(int quantidadeVendida) {
+        this.quantidadeVendida = quantidadeVendida;
     }
     public String getDataVenda() {
         return dataVenda;

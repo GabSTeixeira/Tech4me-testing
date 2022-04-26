@@ -5,7 +5,6 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 import javax.validation.Valid;
-import javax.ws.rs.Path;
 
 import com.api.cadastro.cadastroms.service.CadastroProdutoService;
 import com.api.cadastro.cadastroms.shared.ProdutoDto;

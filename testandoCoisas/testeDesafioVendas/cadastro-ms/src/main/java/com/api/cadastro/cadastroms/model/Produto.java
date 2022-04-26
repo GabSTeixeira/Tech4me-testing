@@ -10,26 +10,26 @@ public class Produto {
     private String nome;
     private String codigo;
     private double preco;
-    private int quantidade;
+    private int quantidadeEstoque;
     
     public boolean removerEstoque (int quantidadeRemover) {
-        if ((this.quantidade - quantidadeRemover) < 0) {
+        if ((this.quantidadeEstoque - quantidadeRemover) < 0) {
             return false;
         }
     
-        this.quantidade -= quantidadeRemover;
+        this.quantidadeEstoque -= quantidadeRemover;
 
         return true;
 
     }
     
-    public int getQuantidade() {
-        return quantidade;
+    public int getQuantidadeEstoque() {
+        return quantidadeEstoque;
     }
 
 
-    public void setQuantidade(int quantidade) {
-        this.quantidade = quantidade;
+    public void setQuantidadeEstoque(int quantidadeEstoque) {
+        this.quantidadeEstoque = quantidadeEstoque;
     }
     public String getId() {
         return id;

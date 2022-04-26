@@ -13,10 +13,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 @FeignClient(name="cadastro-ms")
 public interface ProdutoFeingClient {
     
-    @GetMapping(path="/api/cadastro/pesquisar-por-codigo/{id}")
+    @GetMapping(path="/api/cadastro/pesquisar-por-codigo/{codigo}")
     Optional<ProdutoResponse> getProduto (@PathVariable String codigo);
 
 
-    @PutMapping(path="/api/cadastro/modificar-estoque/{id}")
-    public boolean putStock (@PathVariable String codigo, int novaQuantidade);
+    @PutMapping(path="/api/cadastro/modificar-estoque/{codigo}/{novaQuantidade}")
+    public boolean putStock (@PathVariable String codigo, @PathVariable int novaQuantidade);
 }

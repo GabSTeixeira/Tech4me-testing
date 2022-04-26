@@ -2,7 +2,7 @@ package com.api.venda.vendams.view.model;
 
 public class VendaResponse {
     private String codigo;
-    private int quantidade;
+    private int quantidadeVendida;
     private String dataVenda;
     
     public String getCodigo() {
@@ -11,11 +11,11 @@ public class VendaResponse {
     public void setCodigo(String codigo) {
         this.codigo = codigo;
     }
-    public int getQuantidade() {
-        return quantidade;
+    public int getQuantidadeVendida() {
+        return quantidadeVendida;
     }
-    public void setQuantidade(int quantidade) {
-        this.quantidade = quantidade;
+    public void setQuantidadeVendida(int quantidadeVendida) {
+        this.quantidadeVendida = quantidadeVendida;
     }
     public String getDataVenda() {
         return dataVenda;

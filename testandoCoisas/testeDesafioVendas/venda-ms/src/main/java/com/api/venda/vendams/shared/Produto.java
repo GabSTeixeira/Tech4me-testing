@@ -4,13 +4,13 @@ public class Produto {
     
     private String nome;
     private double preco;
-    private int quantidade;
+    private int quantidadeEstoque;
 
-    public int getQuantidade() {
-        return quantidade;
+    public int getQuantidadeEstoque() {
+        return quantidadeEstoque;
     }
-    public void setQuantidade(int quantidade) {
-        this.quantidade = quantidade;
+    public void setQuantidadeEstoque(int quantidadeEstoque) {
+        this.quantidadeEstoque = quantidadeEstoque;
     }
     public String getNome() {
         return nome;
