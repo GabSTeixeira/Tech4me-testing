@@ -5,7 +5,7 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
-public class VendaInsert {
+public class VendaRequest {
     
     @NotBlank(message = "codigo não pode estar em branco")
     @NotEmpty(message = "codigo não pode ser vazio")

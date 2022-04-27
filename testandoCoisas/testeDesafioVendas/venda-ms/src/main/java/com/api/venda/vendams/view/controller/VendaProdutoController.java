@@ -9,7 +9,7 @@ import javax.validation.Valid;
 import com.api.venda.vendams.service.VendaProdutoService;
 import com.api.venda.vendams.shared.VendaDto;
 import com.api.venda.vendams.view.model.VendaDetails;
-import com.api.venda.vendams.view.model.VendaInsert;
+import com.api.venda.vendams.view.model.VendaRequest;
 import com.api.venda.vendams.view.model.VendaResponse;
 
 import org.modelmapper.ModelMapper;
@@ -63,7 +63,7 @@ public class VendaProdutoController {
 
 
     @PostMapping("/adicionar")
-    public ResponseEntity<VendaDetails> postUnique (@RequestBody @Valid VendaInsert venda) {
+    public ResponseEntity<VendaDetails> postUnique (@RequestBody @Valid VendaRequest venda) {
         
         VendaDto vendaReq = MAPPER.map(venda, VendaDto.class);
         Optional<VendaDto> vendaRes = service.postUnique(vendaReq);
