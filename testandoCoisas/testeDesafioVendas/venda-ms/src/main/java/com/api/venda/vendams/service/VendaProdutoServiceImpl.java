@@ -11,7 +11,6 @@ import com.api.venda.vendams.model.Venda;
 import com.api.venda.vendams.repository.VendaProdutoRepository;
 import com.api.venda.vendams.shared.Produto;
 import com.api.venda.vendams.shared.VendaDto;
-import com.netflix.discovery.converters.Auto;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -50,8 +49,6 @@ public class VendaProdutoServiceImpl implements VendaProdutoService {
             return Optional.empty();
         }
 
-
-        // fazer o metodo de buscar unico e dps fazer o metodo de vender
         VendaDto vendaDtoResponse = MAPPER.map(repositoryResponse.get(), VendaDto.class);
 
         return Optional.of(vendaDtoResponse);
@@ -62,16 +59,19 @@ public class VendaProdutoServiceImpl implements VendaProdutoService {
     public Optional<VendaDto> postUnique (VendaDto venda) {
         boolean operationSucces = cadastro.putStock(venda.getCodigo(), venda.getQuantidadeVendida());
         
+        // se não foi possivel retirar do estoque a venda é cancelada
         if (!operationSucces) {
             return Optional.empty();
         }
 
         Venda vendaRequest = MAPPER.map(venda, Venda.class);
-        Produto produtoRequest = MAPPER.map(cadastro.getProduto(vendaRequest.getCodigo()).get(), Produto.class);
+        Produto produtoRequest = cadastro.getProduto(vendaRequest.getCodigo()).get();
         
+        // guardando o produto dentro da venda
         vendaRequest.setProduto(produtoRequest);
         
-        if(vendaRequest.getDataVenda().isBlank() || vendaRequest.getDataVenda().isEmpty()) {    
+        // caso não tenha data pre-definida é cadastrado a data atual
+        if(vendaRequest.getDataVenda() == null || vendaRequest.getDataVenda().isBlank() || vendaRequest.getDataVenda().isEmpty()) {    
             String actualDate = new SimpleDateFormat("dd/MM/yyyy").format(Calendar.getInstance().getTime());
             
             vendaRequest.setDataVenda(actualDate);

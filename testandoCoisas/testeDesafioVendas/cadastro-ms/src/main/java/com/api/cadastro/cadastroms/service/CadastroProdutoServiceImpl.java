@@ -9,6 +9,7 @@ import com.api.cadastro.cadastroms.repository.CadastroProdutoRepository;
 import com.api.cadastro.cadastroms.shared.ProdutoDto;
 
 import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -16,13 +17,8 @@ public class CadastroProdutoServiceImpl implements CadastroProdutoService {
 
     
     private final ModelMapper MAPPER = new ModelMapper();
-    private final CadastroProdutoRepository repository;
-
-    CadastroProdutoServiceImpl (CadastroProdutoRepository repository){
-        this.repository = repository;
-    }    
-    
-    
+    @Autowired
+    private CadastroProdutoRepository repository;
     @Override
     public Optional<List<ProdutoDto>> listAll() {
         

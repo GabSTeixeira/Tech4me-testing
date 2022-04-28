@@ -2,7 +2,7 @@ package com.api.venda.vendams.clientHttp;
 
 import java.util.Optional;
 
-import com.api.venda.vendams.shared.ProdutoResponse;
+import com.api.venda.vendams.shared.Produto;
 
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 public interface ProdutoFeingClient {
     
     @GetMapping(path="/api/cadastro/pesquisar-por-codigo/{codigo}")
-    Optional<ProdutoResponse> getProduto (@PathVariable String codigo);
+    Optional<Produto> getProduto (@PathVariable String codigo);
 
 
     @PutMapping(path="/api/cadastro/modificar-estoque/{codigo}/{novaQuantidade}")

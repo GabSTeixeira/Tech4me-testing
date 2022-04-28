@@ -12,6 +12,7 @@ import com.api.cadastro.cadastroms.view.model.ProdutoRequest;
 import com.api.cadastro.cadastroms.view.model.ProdutoResponse;
 
 import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -27,11 +28,8 @@ import org.springframework.web.bind.annotation.RestController;
 public class CadastoProdutoController {
     
     private final ModelMapper MAPPER = new ModelMapper();
-    private final CadastroProdutoService service;
-
-    CadastoProdutoController (CadastroProdutoService service) {
-        this.service = service;
-    }
+    @Autowired
+    private CadastroProdutoService service;
 
     @GetMapping
     public ResponseEntity<List<ProdutoResponse>> getAll () {
@@ -62,9 +60,9 @@ public class CadastoProdutoController {
     }
 
     @GetMapping("/pesquisar-por-codigo/{codigo}")
-    public Optional<ProdutoResponse> getUniqueByCodigo (@PathVariable String codigo) {
+    public Optional<ProdutoDto> getUniqueByCodigo (@PathVariable String codigo) {
         
-        return Optional.of(MAPPER.map(service.getUniqueByCodigo(codigo).get(), ProdutoResponse.class));
+        return Optional.of(service.getUniqueByCodigo(codigo).get());
     }
 
     @PostMapping("/adicionar")

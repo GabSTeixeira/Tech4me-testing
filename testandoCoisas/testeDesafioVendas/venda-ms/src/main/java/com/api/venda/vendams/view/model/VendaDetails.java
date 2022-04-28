@@ -1,18 +1,18 @@
 package com.api.venda.vendams.view.model;
 
-import com.api.venda.vendams.shared.ProdutoResponse;
+import com.api.venda.vendams.shared.Produto;
 
 public class VendaDetails {
     
     private String codigo;
     private int quantidadeVendida;
     private String dataVenda;
-    private ProdutoResponse produto;
+    private Produto produto;
     
-    public ProdutoResponse getProduto() {
+    public Produto getProduto() {
         return produto;
     }
-    public void setProduto(ProdutoResponse produto) {
+    public void setProduto(Produto produto) {
         this.produto = produto;
     }
     public String getCodigo() {

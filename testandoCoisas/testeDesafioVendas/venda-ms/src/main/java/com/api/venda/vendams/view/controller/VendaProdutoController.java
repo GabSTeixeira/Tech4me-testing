@@ -13,6 +13,7 @@ import com.api.venda.vendams.view.model.VendaRequest;
 import com.api.venda.vendams.view.model.VendaResponse;
 
 import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -27,11 +28,8 @@ import org.springframework.web.bind.annotation.RestController;
 public class VendaProdutoController {
     
     private final ModelMapper MAPPER = new ModelMapper();
-    private final VendaProdutoService service;
-
-    VendaProdutoController (VendaProdutoService service) {
-        this.service = service;
-    }
+    @Autowired
+    private VendaProdutoService service;
 
     @GetMapping
     public ResponseEntity<List<VendaResponse>> getAll () {

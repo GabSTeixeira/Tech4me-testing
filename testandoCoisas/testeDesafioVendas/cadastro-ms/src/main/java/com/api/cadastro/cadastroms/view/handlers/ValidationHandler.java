@@ -1,4 +1,4 @@
-package com.api.venda.vendams.view.handlers;
+package com.api.cadastro.cadastroms.view.handlers;
 
 import java.util.ArrayList;
 import java.util.List;
